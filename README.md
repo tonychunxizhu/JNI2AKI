@@ -1,1 +1,3 @@
-# JNI2AKI
+# JNI specification for Java 11
+https://docs.oracle.com/en/java/javase/11/docs/specs/jni/intro.html
+
