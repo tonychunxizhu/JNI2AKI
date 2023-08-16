@@ -1,0 +1,7 @@
+ISayHello = interface +c {
+
+    addSayHelloListener(listener : i64);
+    removeSayHelloListener(listener : bool);
+    sayHello(from : string, to : string);
+
+}
