@@ -16,7 +16,7 @@
 using namespace v8;
 using namespace node;
 using namespace std;
-using namespace ;
+using namespace TEST;
 
 class NodeISayHello final {
 public:
@@ -24,11 +24,11 @@ public:
     static void Initialize(Local<Object> target);
     NodeISayHello() = delete;
 
-    static Local<Object> wrap(const std::shared_ptr<::ISayHello> &object);
+    static Local<Object> wrap(const std::shared_ptr<TEST::ISayHello> &object);
     static Nan::Persistent<ObjectTemplate> ISayHello_prototype;
 
 private:
-    static NAN_METHOD(NewInstance);
+    static NAN_METHOD(newInstance);
 
     static NAN_METHOD(get_hello_world);
 

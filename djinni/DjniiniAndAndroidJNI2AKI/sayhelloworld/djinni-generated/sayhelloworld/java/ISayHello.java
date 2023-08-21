@@ -17,7 +17,7 @@ public abstract class ISayHello {
     public abstract void destroy();
 
 
-    public static native ISayHello NewInstance();
+    public static native ISayHello newInstance();
 
     private static final class CppProxy extends ISayHello
     {

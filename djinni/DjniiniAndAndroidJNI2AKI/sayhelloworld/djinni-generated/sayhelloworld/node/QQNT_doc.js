@@ -3,7 +3,7 @@
 
 declare class NodeISayHello
 {
-    static declare function NewInstance(): NodeISayHello;
+    static declare function newInstance(): NodeISayHello;
     declare function get_hello_world(): string;
     declare function addSayHelloListener(listener: number);
     declare function removeSayHelloListener(listener: boolean);

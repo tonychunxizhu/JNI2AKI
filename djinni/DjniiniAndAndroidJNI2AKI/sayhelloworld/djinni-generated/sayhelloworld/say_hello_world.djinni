@@ -1,6 +1,6 @@
 ISayHello = interface +c {
 
-	static NewInstance():ISayHello;
+	static newInstance():ISayHello;
 	get_hello_world(): string;
     addSayHelloListener(listener : i64);
     removeSayHelloListener(listener : bool);

@@ -8,11 +8,13 @@
 #include <memory>
 #include <string>
 
+namespace TEST {
+
 class ISayHello {
 public:
     virtual ~ISayHello() {}
 
-    static std::shared_ptr<ISayHello> NewInstance();
+    static std::shared_ptr<ISayHello> newInstance();
 
     virtual std::string get_hello_world() = 0;
 
@@ -22,4 +24,6 @@ public:
 
     virtual void sayHello(const std::string & from, const std::string & to) = 0;
 };
+
+}  // namespace TEST
 #endif //DJINNI_GENERATED_ISAYHELLO_HPP

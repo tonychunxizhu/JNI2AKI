@@ -9,17 +9,17 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-NAN_METHOD(NodeISayHello::NewInstance) {
+NAN_METHOD(NodeISayHello::newInstance) {
 
     //Check if method called with right number of arguments
     if(info.Length() != 0)
     {
-        return Nan::ThrowError("NodeISayHello::NewInstance needs 0 arguments");
+        return Nan::ThrowError("NodeISayHello::newInstance needs 0 arguments");
     }
 
     //Check if parameters have correct types
 
-    auto result = ::ISayHello::NewInstance();
+    auto result = TEST::ISayHello::newInstance();
 
     //Wrap result in node object
     auto arg_0 = NodeISayHello::wrap(result);
@@ -39,7 +39,7 @@ NAN_METHOD(NodeISayHello::get_hello_world) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<::ISayHello>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<TEST::ISayHello>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NodeISayHello::get_hello_world : implementation of ISayHello is not valid");
@@ -65,7 +65,7 @@ NAN_METHOD(NodeISayHello::addSayHelloListener) {
     auto arg_0 = Nan::To<int64_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<::ISayHello>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<TEST::ISayHello>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NodeISayHello::addSayHelloListener : implementation of ISayHello is not valid");
@@ -84,7 +84,7 @@ NAN_METHOD(NodeISayHello::removeSayHelloListener) {
     auto arg_0 = Nan::To<bool>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<::ISayHello>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<TEST::ISayHello>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NodeISayHello::removeSayHelloListener : implementation of ISayHello is not valid");
@@ -106,7 +106,7 @@ NAN_METHOD(NodeISayHello::sayHello) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<::ISayHello>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<TEST::ISayHello>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NodeISayHello::sayHello : implementation of ISayHello is not valid");
@@ -124,21 +124,21 @@ NAN_METHOD(NodeISayHello::New) {
     //Check if NodeISayHello::New called with right number of arguments
     if(info.Length() != 0)
     {
-        return Nan::ThrowError("NodeISayHello::New needs same number of arguments as ::ISayHello::NewInstance method");
+        return Nan::ThrowError("NodeISayHello::New needs same number of arguments as TEST::ISayHello::newInstance method");
     }
 
     //Unwrap objects to get C++ classes
 
     //Call factory
-    auto cpp_instance = ::ISayHello::NewInstance();
-    djinni::js::ObjectWrapper<::ISayHello>::Wrap(cpp_instance, info.This());
+    auto cpp_instance = TEST::ISayHello::newInstance();
+    djinni::js::ObjectWrapper<TEST::ISayHello>::Wrap(cpp_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
 
 
 Nan::Persistent<ObjectTemplate> NodeISayHello::ISayHello_prototype;
 
-Local<Object> NodeISayHello::wrap(const std::shared_ptr<::ISayHello> &object) {
+Local<Object> NodeISayHello::wrap(const std::shared_ptr<TEST::ISayHello> &object) {
     Nan::EscapableHandleScope scope;
     Local<ObjectTemplate> local_prototype = Nan::New(ISayHello_prototype);
 
@@ -146,7 +146,7 @@ Local<Object> NodeISayHello::wrap(const std::shared_ptr<::ISayHello> &object) {
     if(!local_prototype.IsEmpty())
     {
         obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
-        djinni::js::ObjectWrapper<::ISayHello>::Wrap(object, obj);
+        djinni::js::ObjectWrapper<TEST::ISayHello>::Wrap(object, obj);
     }
     else
     {
@@ -156,7 +156,7 @@ Local<Object> NodeISayHello::wrap(const std::shared_ptr<::ISayHello> &object) {
 }
 
 NAN_METHOD(NodeISayHello::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<::ISayHello>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<TEST::ISayHello>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }
@@ -171,7 +171,7 @@ void NodeISayHello::Initialize(Local<Object> target) {
     func_template->SetClassName(Nan::New<String>("NodeISayHello").ToLocalChecked());
 
     //SetPrototypeMethod all methods
-    Nan::SetPrototypeMethod(func_template,"NewInstance", NewInstance);
+    Nan::SetPrototypeMethod(func_template,"newInstance", newInstance);
     Nan::SetPrototypeMethod(func_template,"get_hello_world", get_hello_world);
     Nan::SetPrototypeMethod(func_template,"addSayHelloListener", addSayHelloListener);
     Nan::SetPrototypeMethod(func_template,"removeSayHelloListener", removeSayHelloListener);

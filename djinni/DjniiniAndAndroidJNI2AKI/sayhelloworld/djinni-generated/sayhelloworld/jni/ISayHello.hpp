@@ -9,10 +9,10 @@
 
 namespace djinni_generated {
 
-class ISayHello final : ::djinni::JniInterface<::ISayHello, ISayHello> {
+class ISayHello final : ::djinni::JniInterface<::TEST::ISayHello, ISayHello> {
 public:
-    using CppType = std::shared_ptr<::ISayHello>;
-    using CppOptType = std::shared_ptr<::ISayHello>;
+    using CppType = std::shared_ptr<::TEST::ISayHello>;
+    using CppOptType = std::shared_ptr<::TEST::ISayHello>;
     using JniType = jobject;
 
     using Boxed = ISayHello;
@@ -26,7 +26,7 @@ public:
 private:
     ISayHello();
     friend ::djinni::JniClass<ISayHello>;
-    friend ::djinni::JniInterface<::ISayHello, ISayHello>;
+    friend ::djinni::JniInterface<::TEST::ISayHello, ISayHello>;
 
 };
 
