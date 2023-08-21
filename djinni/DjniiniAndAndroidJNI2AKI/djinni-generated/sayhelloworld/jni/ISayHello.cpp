@@ -19,6 +19,25 @@ CJNIEXPORT void JNICALL Java_com_ruturaj_huawei_sayhelloworld_ISayHello_00024Cpp
     } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, )
 }
 
+CJNIEXPORT jobject JNICALL Java_com_ruturaj_huawei_sayhelloworld_ISayHello_NewInstance(JNIEnv* jniEnv, jobject /*this*/)
+{
+    try {
+        DJINNI_FUNCTION_PROLOGUE0(jniEnv);
+        auto r = ::ISayHello::NewInstance();
+        return ::djinni::release(::djinni_generated::ISayHello::fromCpp(jniEnv, r));
+    } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, 0 /* value doesn't matter */)
+}
+
+CJNIEXPORT jstring JNICALL Java_com_ruturaj_huawei_sayhelloworld_ISayHello_00024CppProxy_native_1getHelloWorld(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
+{
+    try {
+        DJINNI_FUNCTION_PROLOGUE1(jniEnv, nativeRef);
+        const auto& ref = ::djinni::objectFromHandleAddress<::ISayHello>(nativeRef);
+        auto r = ref->get_hello_world();
+        return ::djinni::release(::djinni::String::fromCpp(jniEnv, r));
+    } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, 0 /* value doesn't matter */)
+}
+
 CJNIEXPORT void JNICALL Java_com_ruturaj_huawei_sayhelloworld_ISayHello_00024CppProxy_native_1addSayHelloListener(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef, jlong j_listener)
 {
     try {

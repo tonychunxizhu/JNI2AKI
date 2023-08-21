@@ -5,11 +5,16 @@
 #define DJINNI_GENERATED_ISAYHELLO_HPP
 
 #include <cstdint>
+#include <memory>
 #include <string>
 
 class ISayHello {
 public:
     virtual ~ISayHello() {}
+
+    static std::shared_ptr<ISayHello> NewInstance();
+
+    virtual std::string get_hello_world() = 0;
 
     virtual void addSayHelloListener(int64_t listener) = 0;
 

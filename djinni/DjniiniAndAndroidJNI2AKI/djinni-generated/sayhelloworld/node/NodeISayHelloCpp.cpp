@@ -9,6 +9,50 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
+NAN_METHOD(NodeISayHello::NewInstance) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NodeISayHello::NewInstance needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    auto result = ::ISayHello::NewInstance();
+
+    //Wrap result in node object
+    auto arg_0 = NodeISayHello::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NodeISayHello::get_hello_world) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NodeISayHello::get_hello_world needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<::ISayHello>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NodeISayHello::get_hello_world : implementation of ISayHello is not valid");
+    }
+
+    auto result = cpp_impl->get_hello_world();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NodeISayHello::addSayHelloListener) {
 
     //Check if method called with right number of arguments
@@ -76,6 +120,18 @@ NAN_METHOD(NodeISayHello::New) {
     {
         return Nan::ThrowError("NodeISayHello function can only be called as constructor (use New)");
     }
+
+    //Check if NodeISayHello::New called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NodeISayHello::New needs same number of arguments as ::ISayHello::NewInstance method");
+    }
+
+    //Unwrap objects to get C++ classes
+
+    //Call factory
+    auto cpp_instance = ::ISayHello::NewInstance();
+    djinni::js::ObjectWrapper<::ISayHello>::Wrap(cpp_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
 
@@ -115,6 +171,8 @@ void NodeISayHello::Initialize(Local<Object> target) {
     func_template->SetClassName(Nan::New<String>("NodeISayHello").ToLocalChecked());
 
     //SetPrototypeMethod all methods
+    Nan::SetPrototypeMethod(func_template,"NewInstance", NewInstance);
+    Nan::SetPrototypeMethod(func_template,"get_hello_world", get_hello_world);
     Nan::SetPrototypeMethod(func_template,"addSayHelloListener", addSayHelloListener);
     Nan::SetPrototypeMethod(func_template,"removeSayHelloListener", removeSayHelloListener);
     Nan::SetPrototypeMethod(func_template,"sayHello", sayHello);

@@ -28,6 +28,10 @@ public:
     static Nan::Persistent<ObjectTemplate> ISayHello_prototype;
 
 private:
+    static NAN_METHOD(NewInstance);
+
+    static NAN_METHOD(get_hello_world);
+
     static NAN_METHOD(addSayHelloListener);
 
     static NAN_METHOD(removeSayHelloListener);

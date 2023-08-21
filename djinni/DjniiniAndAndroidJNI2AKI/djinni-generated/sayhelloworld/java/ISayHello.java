@@ -6,6 +6,8 @@ package com.ruturaj.huawei.sayhelloworld;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class ISayHello {
+    public abstract String getHelloWorld();
+
     public abstract void addSayHelloListener(long listener);
 
     public abstract void removeSayHelloListener(boolean listener);
@@ -14,6 +16,8 @@ public abstract class ISayHello {
     /** Release the underlying native object */
     public abstract void destroy();
 
+
+    public static native ISayHello NewInstance();
 
     private static final class CppProxy extends ISayHello
     {
@@ -38,6 +42,17 @@ public abstract class ISayHello {
             destroy();
             super.finalize();
         }
+
+        @Override
+        public String getHelloWorld()
+        {
+            if (this.destroyed.get())
+            {
+                throw new RuntimeException("trying to use a destroyed object (ISayHello)");
+            }
+            return native_getHelloWorld(this.nativeRef);
+        }
+        private native String native_getHelloWorld(long _nativeRef);
 
         @Override
         public void addSayHelloListener(long listener)
