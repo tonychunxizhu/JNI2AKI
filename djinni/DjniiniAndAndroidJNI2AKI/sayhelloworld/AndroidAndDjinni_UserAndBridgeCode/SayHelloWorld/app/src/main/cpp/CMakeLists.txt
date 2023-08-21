@@ -26,14 +26,19 @@ project("sayhelloworld")
 # used in the AndroidManifest.xml file.
 add_library(${CMAKE_PROJECT_NAME} SHARED
         # List C/C++ source files with relative paths to this CMakeLists.txt.
-        ISayHello.cpp
-        ISayHello.hpp
         djinni_common.hpp
         djinni_support.cpp
         djinni_support.hpp
         Marshal.hpp
         proxy_cache_interface.hpp
+        ISayHello.cpp
+        ISayHello.hpp
+        TestISayHello.h
+        ImplementationISayHello.cpp
+        ImplementationISayHello.h
         native-lib.cpp)
+
+message(STATUS "Linking: " ${CMAKE_PROJECT_NAME}_LIBRARIES)
 
 #add_library(${CMAKE_PROJECT_NAME} SHARED djinni_support.cpp)
 #add_library(${CMAKE_PROJECT_NAME} SHARED ISayHello.cpp)

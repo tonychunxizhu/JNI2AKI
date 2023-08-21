@@ -16,9 +16,9 @@ JNIEXPORT jint JNICALL
 Java_com_ruturaj_huawei_sayhelloworld_MainActivity_sayHello(JNIEnv *env, jclass clazz, jint i) {
     // TODO: implement sayHello()
 
-    __android_log_print(ANDROID_LOG_DEBUG, "RRR", "sayHello Method");
+    __android_log_print(ANDROID_LOG_ERROR, "RRR", "sayHello Method");
 
-    __android_log_print(ANDROID_LOG_DEBUG, "RRR", "%d", i);
+    __android_log_print(ANDROID_LOG_ERROR, "RRR", "%d", i);
 
     return i;
 }

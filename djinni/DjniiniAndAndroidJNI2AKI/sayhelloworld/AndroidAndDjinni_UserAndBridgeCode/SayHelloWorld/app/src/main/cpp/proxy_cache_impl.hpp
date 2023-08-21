@@ -20,7 +20,7 @@
 //#include <functional>
 //#include <mutex>
 //#include <unordered_map>
-//#include "../metrics/ManagedObject.hpp"
+////#include "../metrics/ManagedObject.hpp"
 //
 //// """
 ////    This place is not a place of honor.
@@ -144,6 +144,8 @@
 //    Pimpl() = default;
 //    friend class ProxyCache<Traits>;
 //};
+//
+//class type_index;
 //
 //template <typename Traits>
 //void ProxyCache<Traits>::cleanup(const std::shared_ptr<Pimpl> & base,

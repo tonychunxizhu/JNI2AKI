@@ -22,24 +22,32 @@ public class MainActivity extends AppCompatActivity {
     ISayHello iSayHello = new ISayHello() {
         @Override
         public void addSayHelloListener(long listener) {
-            Log.d("RRR", String.valueOf(listener));
+            Log.e("RRR", String.valueOf(listener));
         }
 
         @Override
         public void removeSayHelloListener(boolean listener) {
-            Log.d("RRR", String.valueOf(listener));
+            Log.e("RRR", String.valueOf(listener));
         }
 
         @Override
         public void sayHello(String from, String to) {
-            Log.d("RRR", from + " " + to);
+            Log.e("RRR", from + " " + to);
+        }
+
+        @Override
+        public String getHelloWorld() {
+            Log.e("RRR", "getHelloWorld");
+            return null;
         }
 
         @Override
         public void destroy() {
-
+            Log.e("RRR", "Released");
         }
     };
+
+//    TestISayHello.CppProxy cppProxy = new TestISayHello.CppProxy(1L);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +65,25 @@ public class MainActivity extends AppCompatActivity {
         iSayHello.addSayHelloListener(1000000000000000000L);
         iSayHello.removeSayHelloListener(true);
         iSayHello.sayHello("my", "world");
+        iSayHello.getHelloWorld();
+//        iSayHello.destroy();
+
+//        cppProxy.addSayHelloListener(2000000000000000000L);
+//        cppProxy.removeSayHelloListener(false);
+//        cppProxy.sayHello("foo", "bar");
+//        cppProxy.destroy();
+
+        ISayHello iSayHello1 = ISayHello.newInstance();
+        tv.setText(iSayHello1.getHelloWorld());
+        Log.e("RRR NewInstance", String.valueOf(iSayHello1));
+//        if(iSayHello1 == null) {
+//            Log.e("RRR", "newInstance returned null!");
+//            return;
+//        }
+//        iSayHello1.addSayHelloListener(3000000000000000000L);
+//        iSayHello1.removeSayHelloListener(true);
+//        iSayHello1.sayHello("john", "smith");
+//        iSayHello1.destroy();
     }
 
     /**
