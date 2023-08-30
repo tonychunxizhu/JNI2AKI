@@ -1,0 +1,17 @@
+Gender = enum {
+	Man;
+	Woman;
+}
+
+MyRecord = record {
+    id: i32;
+	name: string;
+	project: string;
+	sex: Gender;
+}
+
+ISayHello = interface +c {
+	sayHello(testInfo: MyRecord): string;
+	static newInstance(): ISayHello;
+	const version: i32 = 1;
+}
