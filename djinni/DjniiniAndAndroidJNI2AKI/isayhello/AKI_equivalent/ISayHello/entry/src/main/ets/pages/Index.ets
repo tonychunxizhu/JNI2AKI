@@ -1,5 +1,5 @@
 import hilog from '@ohos.hilog';
-import testNapi, { ISayHello } from 'libentry.so'
+import testNapi from 'libentry.so'
 
 enum Gender {
   Man,
@@ -86,14 +86,14 @@ testNapi.JSBind.bindFunction("new ISayHello().finalize", new ISayHello().finaliz
 // // @ts-ignore
 // testNapi.JSBind.bindFunction("CppProxy.newInstance", CppProxy.newInstance)*/
 //
-class MyRecord {
-  /*package*/
+/*class MyRecord {
+  *//*package*//*
   id: number
-  /*package*/
+  *//*package*//*
   name: string
-  /*package*/
+  *//*package*//*
   project: string
-  /*package*/
+  *//*package*//*
   sex: Gender
 
   constructor(id: number,
@@ -130,7 +130,7 @@ class MyRecord {
       "," + "sex=" + this.sex +
       "}";
   }
-}
+}*/
 
 //
 // // @ts-ignore
@@ -144,16 +144,17 @@ class MyRecord {
 // // @ts-ignore
 // testNapi.JSBind.bindFunction("new MyRecord().toString", new MyRecord().toString)
 
-class TestDjinniWrapper implements ISayHello {
-  newInstance: () => testNapi.ISayHello;
+/*class TestDjinniWrapper implements ISayHello {
+  sayHello: (testInfo: testNapi.MyRecord) => string
+  newInstance: () => ISayHello
 
-  sayHello(testInfo: MyRecord): string {
-    return `name1: ${testInfo.name} project1: ${testInfo.project}`;
-  }
-}
+  // sayHello(testInfo: MyRecord): string {
+  //   return `name1: ${testInfo.name} project1: ${testInfo.project}
+  // }
+}*/
 
 // @ts-ignore
-testNapi.JSBind.bindFunction("new TestDjinniWrapper().sayHello", new TestDjinniWrapper().sayHello)
+// testNapi.JSBind.bindFunction("new TestDjinniWrapper().sayHello", new TestDjinniWrapper().sayHello)
 
 @Entry
 @Component
@@ -168,6 +169,7 @@ struct Index {
           .fontWeight(FontWeight.Bold)
           .onClick(() => {
             hilog.error(0x0000, 'RRR', '%{public}d', testNapi.androidJNISayHello(1));
+
             // testNapi.androidJNISayHello(1)
             // testNapi.Gender.Man
             // testNapi.Gender.Woman
@@ -184,15 +186,19 @@ struct Index {
             // this.message = a
 
 
-            /*var iSayHello = new testNapi.ISayHello()
-            var sh = iSayHello.sayHello(new MyRecord(1234, "djinni test \n", "djinni", Gender.Man));
-            // const a: string = testNapi.ISayHello.sayHello(new MyRecord(1234, "djinni test \n", "djinni", Gender.Man))
-            this.message = sh*/
+            /* var iSayHello = new testNapi.ISayHello()
+             var sh = iSayHello.sayHello(new MyRecord(1234, "djinni test \n", "djinni", Gender.Man));
+             // const a: string = testNapi.ISayHello.sayHello(new MyRecord(1234, "djinni test \n", "djinni", Gender.Man))
+             this.message = sh*/
 
-             const djnniInterface: TestDjinniWrapper = new TestDjinniWrapper()
-             const a: string = djnniInterface.sayHello(new MyRecord(1234, "djinni test \n", "djinni", Gender.Man))
-
-             this.message = a
+            var djnniInterface = new testNapi.TestDjinniWrapper()
+            hilog.error(0x0000, 'RRR', '%{public}d', 2);
+            var infoStore = new testNapi.MyRecord(1234, "djinni test \n", "djinni", Gender.Woman)
+            hilog.error(0x0000, 'RRR', '%{public}d', 3);
+            var a: string = djnniInterface.sayHello(infoStore)
+            hilog.error(0x0000, 'RRR', '%{public}d', 4);
+            this.message = a
+            hilog.error(0x0000, 'RRR', '%{public}d', 5);
 
           })
       }

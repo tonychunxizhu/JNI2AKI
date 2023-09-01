@@ -1,18 +1,95 @@
-#include "hello.h"
-#include <iostream>
+#include <bits/alltypes.h>
 #include <string>
 #include <aki/jsbind.h>
 #include <hilog/log.h>
-#include <iostream>
 #include <string>
-#include <cstdint>
-#include <string>
-#include <iostream>
 
 void androidJNISayHello(int i) {
     // TODO: implement androidJNISayHello()
     OH_LOG_Print(LOG_APP, LOG_ERROR, LOG_DOMAIN, "RRR", "%{public}d", i);
 }
+
+namespace test {
+namespace hello {
+
+enum Gender {
+    Man,
+    Woman,
+};
+
+/*struct MyRecord
+{
+public:
+    MyRecord() = default;
+
+    int32_t id;
+    std::string name;
+    std::string project;
+    Gender sex;
+
+    //     MyRecord(int32_t id_, std::string name_, std::string project_, Gender sex_)
+    //         : id(std::move(id_)), name(std::move(name_)), project(std::move(project_)), sex(std::move(sex_)) {}
+};*/
+
+class MyRecord
+{
+public:
+    MyRecord() = default;
+
+    int32_t id;
+    std::string name;
+    std::string project;
+    Gender sex;
+
+   explicit MyRecord(int32_t id_, std::string name_, std::string project_, Gender sex_)
+        : id(id_), name(std::move(name_)), project(std::move(project_)), sex(sex_) {}
+
+//    int32_t getId();
+//
+//    std::string getName();
+//
+//    std::string getProject();
+//
+//    Gender getSex();
+};
+
+class ISayHello
+{
+public:
+    virtual ~ISayHello() {}
+
+    static constexpr int32_t VERSION = 1;
+
+    std::string sayHello(const MyRecord &testInfo);
+
+    static std::shared_ptr<ISayHello> NewInstance();
+};
+
+// JSBIND_CLASS(ISayHello) {
+//     JSBIND_CONSTRUCTOR<>();
+//     JSBIND_METHOD(sayHello);
+//     JSBIND_METHOD(NewInstance);
+// }
+
+JSBIND_CLASS(MyRecord) {
+    JSBIND_CONSTRUCTOR<int32_t, std::string, std::string, Gender>();
+    JSBIND_PROPERTY(id);
+    JSBIND_PROPERTY(name);
+    JSBIND_PROPERTY(project);
+    JSBIND_PROPERTY(sex);
+//    JSBIND_METHOD(getId);
+//    JSBIND_METHOD(getName);
+//    JSBIND_METHOD(getProject);
+//    JSBIND_METHOD(getSex);
+}
+
+JSBIND_ENUM(Gender) {
+    JSBIND_ENUM_VALUE(Man);
+    JSBIND_ENUM_VALUE(Woman);
+}
+
+} // namespace hello
+} // namespace test
 
 class TestDjinniWrapper : public test::hello::ISayHello
 {
@@ -20,10 +97,10 @@ public:
     TestDjinniWrapper() = default;
 
     std::string sayHello(const test::hello::MyRecord &testInfo) {
-        auto f = aki::JSBind::GetJSFunction("new TestDjinniWrapper().sayHello");
-        auto value = f->Invoke<char *>();
+        //        auto f = aki::JSBind::GetJSFunction("new TestDjinniWrapper().sayHello");
+        //        auto value = f->Invoke<char *>();
         std::string msg = "name: " + testInfo.name + " project: " + testInfo.project;
-        OH_LOG_Print(LOG_APP, LOG_ERROR, LOG_DOMAIN, "RRR", "%{public}s", value);
+        OH_LOG_Print(LOG_APP, LOG_ERROR, LOG_DOMAIN, "RRR", "%{public}d", 6);
         return msg;
     }
 };
@@ -129,7 +206,6 @@ JSBIND_CLASS(TestDjinniWrapper) {
 JSBIND_GLOBAL() {
     JSBIND_FUNCTION(androidJNISayHello);
     JSBIND_FUNCTION(TestDjinniWrapper::ISayHello::NewInstance);
-//    JSBIND_FUNCTION(test::hello::ISayHello::sayHello);
 }
 
 JSBIND_ADDON(entry)

@@ -30,7 +30,7 @@ export class ISayHello {
 //   static newInstance(): ISayHello;
 // }
 
-export declare class MyRecord {
+export class MyRecord {
   id: number
   name: string
   project: string
@@ -47,4 +47,9 @@ export declare class MyRecord {
   getSex: () => Gender
 
   toString: () => string
+}
+
+export class TestDjinniWrapper extends ISayHello {
+  sayHello: (testInfo: MyRecord) => string
+  newInstance: () => ISayHello
 }
