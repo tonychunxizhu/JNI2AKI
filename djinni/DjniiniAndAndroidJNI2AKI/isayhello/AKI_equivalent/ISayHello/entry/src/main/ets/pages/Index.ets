@@ -1,5 +1,6 @@
 import hilog from '@ohos.hilog';
 import testNapi from 'libentry.so'
+import testNapi2 from 'libentry2.so'
 
 enum Gender {
   Man,
@@ -21,8 +22,8 @@ struct Index {
 
             testNapi.androidJNISayHello(1)
 
-            var djnniInterface = new testNapi.TestDjinniWrapper()
-            var infoStore = new testNapi.MyRecord(1234, "djinni test \n", "djinni", Gender.Woman)
+            var djnniInterface = new testNapi2.TestDjinniWrapper()
+            var infoStore = new testNapi2.MyRecord(1234, "djinni test \n", "djinni", Gender.Woman)
             var a: string = djnniInterface.sayHello(infoStore)
             this.message = a
 
