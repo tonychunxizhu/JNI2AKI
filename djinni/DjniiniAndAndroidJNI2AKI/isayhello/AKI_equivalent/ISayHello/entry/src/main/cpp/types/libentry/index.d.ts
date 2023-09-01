@@ -6,29 +6,12 @@ export enum Gender {
 }
 
 export class ISayHello {
-  // finalize: () => void
-
   static readonly VERSION = 1
 
   sayHello: (testInfo: MyRecord) => string
 
   newInstance: () => ISayHello
 }
-
-// export declare class CppProxy extends ISayHello {
-//   private readonly nativeRef: number;
-//   private destroyed: boolean;
-//
-//   constructor(nativeRef: number);
-//
-//   _djinni_private_destroy(): void;
-//
-//   sayHello(testInfo: MyRecord): string;
-//
-//   private native_sayHello(nativeRef: number, testInfo: MyRecord): string;
-//
-//   static newInstance(): ISayHello;
-// }
 
 export class MyRecord {
   id: number
