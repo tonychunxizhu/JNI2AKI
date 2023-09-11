@@ -1,10 +1,6 @@
 #include <string>
 #include <aki/jsbind.h>
 #include <hilog/log.h>
-#include <string>
-#include "header/Gender.h"
-#include "header/ISayHello.h"
-#include "header/MyRecord.h"
 
 void androidJNISayHello(int i) {
     // TODO: implement androidJNISayHello()

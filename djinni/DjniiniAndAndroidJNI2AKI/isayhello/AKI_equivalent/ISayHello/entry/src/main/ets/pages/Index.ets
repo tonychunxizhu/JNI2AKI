@@ -23,7 +23,7 @@ struct Index {
             testNapi.androidJNISayHello(1)
 
             var djnniInterface = new testNapi2.TestDjinniWrapper()
-            var infoStore = new testNapi2.MyRecord(1234, "djinni test \n", "djinni", Gender.Woman)
+            var infoStore = new testNapi2.MyRecord(1234, "djinni test \n", "djinni", Gender.Man)
             var a: string = djnniInterface.sayHello(infoStore)
             this.message = a
 

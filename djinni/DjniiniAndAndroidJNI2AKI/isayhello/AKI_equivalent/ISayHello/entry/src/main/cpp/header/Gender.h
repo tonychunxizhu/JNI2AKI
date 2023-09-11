@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <functional>
 #include "aki/jsbind.h"
 
 namespace test {
